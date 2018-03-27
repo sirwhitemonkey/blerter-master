@@ -1,0 +1,10 @@
+server:
+  port: 4010
+
+grpc:
+  port: 4012
+  
+spring:
+  output:
+    ansi:
+      enabled: always

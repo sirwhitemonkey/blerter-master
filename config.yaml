@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blerter-master
+spec:
+  type: NodePort
+  ports:
+    - name: master-server
+      port: 4010
+      protocol: TCP
+      targetPort: 4010
+    - name: grpc--master-server
+      port: 4012
+      protocol: TCP
+      targetPort: 4012
+  selector:
+    name:  blerter-master
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: blerter-master
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name:  blerter-master
+      labels:
+        name:  blerter-master
+        app:  blerter-master
+    spec:
+      containers:
+        - name:  blerter-master
+          image: sirwhitemonkey/blerter-master
+          #resources:
+          #  requests:
+          #    memory: 1Gi
+          #  limits:
+          #    memory: 1Gi
+          env:
+            - name: BLERTER_DB_HOST
+              value: BLERTER_DB_HOST
+            - name: BLERTER_DB_PORT
+              value: "5432"
+            - name: BLERTER_DB_NAME
+              value: blerter
+            - name: BLERTER_DB_USER
+              value: blerter
+            - name: BLERTER_DB_PASSWORD
+              value: blerter
+            - name: BLERTER_DB_DRIVER
+              value: org.postgresql.Driver
+          ports:
+            - containerPort: 4010
+            - containerPort: 4012
+            
+

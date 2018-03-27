@@ -1,0 +1,5 @@
+com/blerter/repository/HealthRepository.class
+com/blerter/Application.class
+com/blerter/repository/impl/HealthRepositoryImpl.class
+com/blerter/master/grpc/service/GrpcMasterService.class
+com/blerter/service/MasterService.class
